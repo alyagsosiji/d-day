@@ -1,20 +1,20 @@
-// 1. 디데이 목표 날짜 설정 (2026년 4월 16일 00:00:00)
+// 1. 디데이 목표 날짜 설정 (2026년 4월 16일)
 const targetDate = new Date("April 16, 2026 00:00:00").getTime();
 
 function updateCountdown() {
     const now = new Date().getTime();
-    const difference = targetDate - now;
+    
+    // 과거와 미래 시간에 구애받지 않고 실시간으로 작동하도록 절대값(Math.abs) 활용
+    const isPast = now > targetDate;
+    const difference = Math.abs(targetDate - now);
 
-    // 시간이 다 되었을 때 출력될 문구
-    if (difference < 0) {
-        document.querySelector(".title").innerText = "수평선 너머 마침내 마주한 우리의 날 ✨";
-        document.querySelector(".subtitle").innerText = "Our beautiful story begins here.";
-        document.getElementById("days").innerText = "00";
-        document.getElementById("hours").innerText = "00";
-        document.getElementById("minutes").innerText = "00";
-        document.getElementById("seconds").innerText = "00";
-        document.getElementById("milliseconds").innerText = "000";
-        return;
+    // 날짜 상태에 맞춰 타이틀 텍스트 유연하게 변경
+    if (isPast) {
+        document.querySelector(".title").innerText = "수평선 너머 마주한 우리의 시간 ✨";
+        document.querySelector(".subtitle").innerText = "Every second with you is a beautiful miracle.";
+    } else {
+        document.querySelector(".title").innerText = "수평선 너머의 디데이";
+        document.querySelector(".subtitle").innerText = "Beyond the horizon, where our time meets.";
     }
 
     // 시간 계산 공식
@@ -22,14 +22,16 @@ function updateCountdown() {
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-    const milliseconds = Math.floor((difference % 1000));
+    
+    // 💡 밀리초(1000ms)를 10으로 나누어 완벽한 2자리(00~99) 숫자로 압축 계산
+    const milliseconds = Math.floor((difference % 1000) / 10);
 
-    // 화면 갱신
-    document.getElementById("days"+1).innerText = String(days).padStart(2, "0");
+    // 화면에 두 자릿수 포맷팅하여 갱신 (MS도 2자리로 정상 패딩)
+    document.getElementById("days").innerText = String(days).padStart(2, "0");
     document.getElementById("hours").innerText = String(hours).padStart(2, "0");
     document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
     document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
-    document.getElementById("milliseconds").innerText = String(milliseconds).padStart(3, "0");
+    document.getElementById("milliseconds").innerText = String(milliseconds).padStart(2, "0");
 }
 
 function animate() {
