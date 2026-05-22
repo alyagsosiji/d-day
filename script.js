@@ -1,11 +1,10 @@
-// 디데이 목표 날짜 설정 (원하는 날짜로 변경하세요)
+// 디데이 목표 날짜 설정 (원하는 일시로 자유롭게 변경)
 const targetDate = new Date("December 31, 2026 00:00:00").getTime();
 
 function updateCountdown() {
     const now = new Date().getTime();
     const difference = targetDate - now;
 
-    // 시간이 다 되었을 때 수정된 타이틀에 맞춘 문구
     if (difference < 0) {
         document.querySelector(".title").innerText = "수평선 너머 마침내 마주한 우리의 날 ✨";
         document.querySelector(".subtitle").innerText = "Our beautiful story begins here.";
@@ -36,15 +35,15 @@ function animate() {
 }
 animate();
 
-// 밤하늘 별빛 입자 생성기
+// 밤하늘 은하수 입자 생성기
 const starsContainer = document.getElementById("stars-container");
-const starCount = 50;
+const starCount = 40; // 모바일 기기 성능을 고려하여 최적의 개수로 세팅
 
 for (let i = 0; i < starCount; i++) {
     const star = document.createElement("div");
     star.classList.add("star");
 
-    const size = Math.random() * 3 + 1;
+    const size = Math.random() * 2.5 + 1; // 1px ~ 3.5px 크기
     const leftPosition = Math.random() * 100;
     const duration = Math.random() * 12 + 10;
     const delay = Math.random() * -20;
