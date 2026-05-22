@@ -51,7 +51,6 @@ body {
     100% { transform: translateY(-5dvh) scale(1.2); opacity: 0; }
 }
 
-/* 메인 박스 */
 .main-container {
     position: relative;
     z-index: 2;
@@ -87,7 +86,6 @@ body {
     opacity: 0.6;
 }
 
-/* 🎵 음악 플레이어 레이아웃 스타일 */
 .player-wrapper {
     display: flex;
     flex-direction: column;
@@ -95,7 +93,6 @@ body {
     margin-bottom: clamp(2rem, 5vh, 3.2rem);
 }
 
-/* 이미지의 타원형 외부 캡슐 재현 */
 .cd-capsule {
     width: 110px;
     height: 80px;
@@ -107,17 +104,15 @@ body {
     align-items: center;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(34, 211, 238, 0.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-/* 호버 및 재생 중일 때의 부드러운 네온 글로우 효과 */
 .cd-capsule:hover, .cd-capsule.playing {
     transform: scale(1.04);
     border-color: rgba(192, 132, 252, 0.4);
     box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
 }
 
-/* 보라-민트 계열의 오로라 디스크 구현 */
 .cd-disk {
     width: 64px;
     height: 64px;
@@ -127,18 +122,14 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.6), 0 0 10px rgba(129, 140, 248, 0.3);
-    
-    /* 재생 제어용 애니메이션 정의 (기본 정지 상태) */
     animation: rotateDisk 5s linear infinite;
     animation-play-state: paused;
 }
 
-/* 재생 클래스가 붙으면 회전 시작 */
 .cd-capsule.playing .cd-disk {
     animation-play-state: running;
 }
 
-/* 디스크 내부 동심원 라인 */
 .cd-inner-ring {
     width: 24px;
     height: 24px;
@@ -149,7 +140,6 @@ body {
     align-items: center;
 }
 
-/* 디스크 중심 홀 */
 .cd-center-hole {
     width: 8px;
     height: 8px;
@@ -172,10 +162,9 @@ body {
     transition: color 0.3s;
 }
 .cd-capsule.playing + .player-tip {
-    color: #a78bfa; /* 재생 중일 때 텍스트 색 변경 */
+    color: #a78bfa;
 }
 
-/* 카운트다운 타이머 배열 크기 맞춤 */
 .countdown-wrapper {
     display: flex;
     justify-content: space-between;
@@ -204,10 +193,10 @@ body {
     filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.2));
 }
 
+/* 밀리초(MS)가 2자리가 되었으므로 다른 숫자들과 크기 및 정렬을 동일하게 맞춤 */
 .ms-box .time-num {
-    font-size: clamp(1.1rem, 4.8vw, 2.2rem);
+    font-size: clamp(1.5rem, 6.2vw, 3.4rem);
     color: #f472b6;
-    margin-top: auto;
 }
 
 .time-label {
