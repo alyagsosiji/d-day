@@ -22,7 +22,7 @@ function updateCountdown() {
     if (currentMode === 'countdown') {
         difference = targetDate - now;
         mainTitle.innerHTML = '수평선 너머의 디데이';
-        mainSubtitle.innerText = "Beyond the horizon, where our time meets.";
+        mainSubtitle.innerText = "26년 06월 06일을 기다리며.";
 
         if (difference < 0) {
             difference = 0;
@@ -33,7 +33,7 @@ function updateCountdown() {
     } else {
         difference = now - targetDate;
         mainTitle.innerHTML = '우리가 함께 흘러온 시간 <span class="emoji">🌊</span>';
-        mainSubtitle.innerText = "Every single second with you is a cosmic miracle.";
+        mainSubtitle.innerText = "26년 06월 06일";
 
         if (difference < 0) {
             difference = 0;
