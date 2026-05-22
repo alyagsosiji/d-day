@@ -28,7 +28,7 @@ function updateCountdown() {
             difference = 0;
             // 🛠️ 이모지에 전용 클래스(emoji)를 입혀 깨짐 및 잘림 전면 차단
             mainTitle.innerHTML = '수평선 너머 마침내 마주한<br>우리의 특별한 날 <span class="emoji">✨</span>';
-            mainSubtitle.innerText = "Our beautiful story begins here.";
+            mainSubtitle.innerText = "26년 06월 06일";
         }
     } else {
         difference = now - targetDate;
