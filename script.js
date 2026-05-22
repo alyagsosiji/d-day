@@ -2,9 +2,9 @@
    ⚙️ [초간편 날짜 설정 구역] 숫자만 원하는 디데이 일정으로 변경하세요!
    ========================================================== */
 const TARGET_YEAR  = 2026;  // 연도
-const TARGET_MONTH = 4;     // 월 (1 ~ 12)
-const TARGET_DAY   = 16;    // 일 (1 ~ 31)
-const TARGET_HOUR  = 0;     // 시 (0 ~ 23)
+const TARGET_MONTH = 6;     // 월 (1 ~ 12)
+const TARGET_DAY   = 6;    // 일 (1 ~ 31)
+const TARGET_HOUR  = 8;     // 시 (0 ~ 23)
 const TARGET_MIN   = 0;     // 분 (0 ~ 59)
 const TARGET_SEC   = 0;     // 초 (0 ~ 59)
 /* ========================================================== */
