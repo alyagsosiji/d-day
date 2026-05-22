@@ -2,16 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* 모바일 터치 시 생기는 파란색 하이라이트 제거 */
     -webkit-tap-highlight-color: transparent; 
 }
 
 body {
     width: 100vw;
-    /* dvh: 모바일 브라우저 주소창 유무에 상관없이 꽉 차는 사이지를 유지해 줌 */
     height: 100dvh; 
     overflow: hidden;
-    background: linear-gradient(-45deg, #0f172a, #1e1b4b, #3b0764, #1e293b);
+    background: linear-gradient(-45deg, #090d16, #12132c, #250a3a, #0f172a);
     background-size: 400% 400%;
     animation: gradientBG 20s ease infinite;
     font-family: 'Noto Serif KR', serif;
@@ -53,52 +51,137 @@ body {
     100% { transform: translateY(-5dvh) scale(1.2); opacity: 0; }
 }
 
-/* 메인 카드 (글래스모피즘 효과) */
+/* 메인 박스 */
 .main-container {
     position: relative;
     z-index: 2;
     text-align: center;
-    /* clamp(최소, 기본 반응형 크기, 최대) 공식을 사용하여 기기별로 여백 자동 조절 */
-    padding: clamp(2rem, 6vh, 4rem) clamp(1rem, 5vw, 3rem);
-    background: rgba(255, 255, 255, 0.03);
+    padding: clamp(1.8rem, 5vh, 3.5rem) clamp(1rem, 5vw, 3rem);
+    background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     width: 100%;
-    max-width: 680px;
+    max-width: 650px;
 }
 
-/* 타이틀 텍스트 크기 자동 최적화 */
 .title {
     font-family: 'Cinzel', 'Noto Serif KR', serif;
-    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    font-size: clamp(1.4rem, 4.8vw, 2.2rem);
     font-weight: 500;
     letter-spacing: 2px;
-    margin-bottom: 0.8rem;
-    background: linear-gradient(to right, #ffffff, #e0e7ff, #fbcfe8);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #ffffff, #e0e7ff, #e8d5ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
 }
 
 .subtitle {
-    font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+    font-size: clamp(0.7rem, 2.2vw, 0.85rem);
     font-weight: 300;
     letter-spacing: 1px;
-    color: #cbd5e1;
-    margin-bottom: clamp(2rem, 5vh, 3.5rem);
+    color: #94a3b8;
+    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
     opacity: 0.6;
 }
 
-/* 카운트다운 가로 정렬 및 모바일 한 줄 유지용 배치 */
+/* 🎵 음악 플레이어 레이아웃 스타일 */
+.player-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: clamp(2rem, 5vh, 3.2rem);
+}
+
+/* 이미지의 타원형 외부 캡슐 재현 */
+.cd-capsule {
+    width: 110px;
+    height: 80px;
+    background: rgba(5, 11, 22, 0.6);
+    border: 1px solid rgba(34, 211, 238, 0.15);
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(34, 211, 238, 0.05);
+}
+
+/* 호버 및 재생 중일 때의 부드러운 네온 글로우 효과 */
+.cd-capsule:hover, .cd-capsule.playing {
+    transform: scale(1.04);
+    border-color: rgba(192, 132, 252, 0.4);
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
+}
+
+/* 보라-민트 계열의 오로라 디스크 구현 */
+.cd-disk {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c7d2fe 0%, #c084fc 35%, #818cf8 65%, #a5f3fc 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.6), 0 0 10px rgba(129, 140, 248, 0.3);
+    
+    /* 재생 제어용 애니메이션 정의 (기본 정지 상태) */
+    animation: rotateDisk 5s linear infinite;
+    animation-play-state: paused;
+}
+
+/* 재생 클래스가 붙으면 회전 시작 */
+.cd-capsule.playing .cd-disk {
+    animation-play-state: running;
+}
+
+/* 디스크 내부 동심원 라인 */
+.cd-inner-ring {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(15, 23, 42, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 디스크 중심 홀 */
+.cd-center-hole {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #090d16;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+@keyframes rotateDisk {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.player-tip {
+    font-size: 0.65rem;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 2px;
+    color: #64748b;
+    margin-top: 0.7rem;
+    transition: color 0.3s;
+}
+.cd-capsule.playing + .player-tip {
+    color: #a78bfa; /* 재생 중일 때 텍스트 색 변경 */
+}
+
+/* 카운트다운 타이머 배열 크기 맞춤 */
 .countdown-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: clamp(0.2rem, 1.5vw, 1.2rem);
-    margin-bottom: clamp(2rem, 5vh, 3rem);
+    gap: clamp(0.2rem, 1.2vw, 1rem);
+    margin-bottom: clamp(1.8rem, 4vh, 2.5rem);
     width: 100%;
 }
 
@@ -106,53 +189,49 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1; /* 모바일 크기에 맞춰 정확히 5등분 분할 */
-    min-width: 0; /* flex 자식 요소 찌그러짐 방지 */
+    flex: 1;
+    min-width: 0;
 }
 
-/* 숫자 크기를 vw(화면 너비 비율)로 주어 모바일에서도 글자가 절대 안 깨지게 조정 */
 .time-num {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.6rem, 6.5vw, 3.6rem);
+    font-size: clamp(1.5rem, 6.2vw, 3.4rem);
     font-weight: 700;
     line-height: 1;
-    background: linear-gradient(135deg, #ffffff 0%, #ddd6fe 55%, #f472b6 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #f472b6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.3));
+    filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.2));
 }
 
-/* 밀리초(MS) 디자인 밸런스 조정 */
 .ms-box .time-num {
-    font-size: clamp(1.2rem, 5vw, 2.4rem);
+    font-size: clamp(1.1rem, 4.8vw, 2.2rem);
     color: #f472b6;
-    margin-top: auto; /* 줄바꿈 방지 및 하단 정렬 느낌 제공 */
+    margin-top: auto;
 }
 
 .time-label {
-    font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+    font-size: clamp(0.55rem, 1.6vw, 0.7rem);
     letter-spacing: 1px;
-    color: #94a3b8;
-    margin-top: 0.6rem;
+    color: #475569;
+    margin-top: 0.5rem;
     font-weight: 500;
 }
 
 .heart-icon {
-    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    font-size: clamp(1.2rem, 3.5vw, 1.5rem);
     color: #f472b6;
     animation: heartbeat 2s infinite ease-in-out;
-    filter: drop-shadow(0 0 12px rgba(244, 114, 182, 0.6));
+    filter: drop-shadow(0 0 10px rgba(244, 114, 182, 0.5));
     display: inline-block;
 }
 
 @keyframes heartbeat {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.2); opacity: 1; }
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.18); opacity: 0.9; }
 }
 
-/* 초소형 스마트폰 (화면 너비 350px 이하)을 위한 미세 조정 */
 @media (max-width: 350px) {
-    .main-container { padding: 1.5rem 0.8rem; }
-    .time-label { font-size: 0.55rem; letter-spacing: 0; }
-    .title { font-size: 1.3rem; }
+    .main-container { padding: 1.2rem 0.6rem; }
+    .time-label { font-size: 0.5rem; letter-spacing: 0; }
 }
