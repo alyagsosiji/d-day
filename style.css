@@ -31,7 +31,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 🌀 로딩 스크린 디자인 아키텍처 */
+/* 🌀 로딩 스크린 디자인 */
 #loading-screen {
     position: fixed;
     top: 0;
@@ -48,7 +48,6 @@ body {
     visibility: visible;
 }
 
-/* 로딩 스크린이 걷힐 때 작동할 페이드아웃 전환 */
 #loading-screen.fade-out {
     opacity: 0;
     visibility: hidden;
@@ -70,7 +69,6 @@ body {
     box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
 }
 
-/* 🛠️ 해결책: 구글 웹폰트와 무관하게 처음부터 글자 깨짐/움직임 현상을 박멸하는 시스템 내장 폰트 선언 */
 .loader-text {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 0.85rem;
@@ -78,7 +76,7 @@ body {
     color: #94a3b8;
     letter-spacing: 3px;
     animation: pulseText 1.6s infinite ease-in-out;
-    white-space: nowrap; /* 글자가 쪼개져서 아래로 튕겨 떨어지는 현상 차단 */
+    white-space: nowrap;
 }
 
 @keyframes spinLoader {
@@ -125,6 +123,7 @@ body.eco-mode #stars-container {
     100% { transform: translateY(-5dvh) scale(1.2); opacity: 0; }
 }
 
+/* 메인 대시보드 카드 */
 .main-container {
     position: relative;
     z-index: 2;
@@ -191,7 +190,6 @@ body.countup-active #mode-toggle {
     -webkit-text-fill-color: transparent;
 }
 
-/* 이모지 컬러 마스크 파괴 및 해상도 보존 클래스 */
 .title .emoji {
     display: inline-block;
     background: none !important;
@@ -344,6 +342,27 @@ body.countup-active #mode-toggle {
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); opacity: 0.4; }
     50% { transform: scale(1.15); opacity: 0.9; }
+}
+
+/* 📄 푸터(저작권 표기) 스타일 설계 */
+.site-footer {
+    position: absolute;
+    bottom: clamp(10px, 2.5vh, 18px); /* 모바일 하단 주소창 영역 침범 차단 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(0.55rem, 1.8vw, 0.7rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.22); /* 메인 카드를 방해하지 않는 고급스러운 반투명 톤 */
+    letter-spacing: 1px;
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none; /* 하단 터치 조작 시 터치 씹힘 방지 */
+    transition: color 0.3s;
+}
+
+body.eco-mode .site-footer {
+    color: rgba(255, 255, 255, 0.15);
 }
 
 @media (max-width: 360px) {
