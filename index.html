@@ -13,12 +13,17 @@
     <div id="stars-container"></div>
 
     <div class="main-container">
-        <button id="eco-toggle" class="eco-btn" title="화면 최적화 켜기/끄기">
-            <span class="eco-icon">✨</span> <span id="eco-text">최적화 Mode</span>
-        </button>
+        <div class="control-panel">
+            <button id="eco-toggle" class="control-btn" title="화면 최적화 모드 켜고 끄기">
+                <span>✨</span> <span id="eco-text">최적화 Mode</span>
+            </button>
+            <button id="mode-toggle" class="control-btn" title="타이머 모드 전환">
+                <span id="mode-icon">⏳</span> <span id="mode-text">남은 시간 보기</span>
+            </button>
+        </div>
 
-        <h1 class="title">수평선 너머의 디데이</h1>
-        <p class="subtitle">Beyond the horizon, where our time meets.</p>
+        <h1 class="title" id="main-title">수평선 너머의 디데이</h1>
+        <p class="subtitle" id="main-subtitle">Beyond the horizon, where our time meets.</p>
         
         <div class="player-wrapper">
             <div class="cd-capsule" id="cd-player">
