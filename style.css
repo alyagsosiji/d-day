@@ -1,3 +1,4 @@
+/* 전역 복사 및 마우스 드래그 완전 잠금 */
 * {
     margin: 0;
     padding: 0;
@@ -30,25 +31,24 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 🌀 로딩 스크린 전용 스타일 (최상단 고정 레이어) */
+/* 🌀 로딩 스크린 디자인 아키텍처 */
 #loading-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100dvh;
-    background-color: #090d16; /* 밤하늘 테마의 첫 컬러와 결합 */
+    background-color: #090d16;
     z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* 0.8초 동안 밤하늘이 스르륵 걷히는 감성 페이드 아웃 */
-    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s;
     opacity: 1;
     visibility: visible;
 }
 
-/* 로딩 완료 시 부여될 클로징 액션 효과 */
+/* 로딩 스크린이 걷힐 때 작동할 페이드아웃 전환 */
 #loading-screen.fade-out {
     opacity: 0;
     visibility: hidden;
@@ -58,25 +58,27 @@ body {
     text-align: center;
 }
 
-/* 신비로운 오로라 빛 네온 원형 로더 */
 .loader-circle {
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
     border: 3px solid rgba(192, 132, 252, 0.08);
     border-top: 3px solid #c084fc;
     border-right: 3px solid #a5f3fc;
     border-radius: 50%;
-    animation: spinLoader 1s cubic-bezier(0.6, 0.2, 0.2, 0.8) infinite;
-    margin: 0 auto 1.5rem;
+    animation: spinLoader 0.9s cubic-bezier(0.5, 0.2, 0.2, 0.8) infinite;
+    margin: 0 auto 1.3rem;
     box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
 }
 
+/* 🛠️ 해결책: 구글 웹폰트와 무관하게 처음부터 글자 깨짐/움직임 현상을 박멸하는 시스템 내장 폰트 선언 */
 .loader-text {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 0.88rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
     color: #94a3b8;
     letter-spacing: 3px;
-    animation: pulseText 1.8s infinite ease-in-out;
+    animation: pulseText 1.6s infinite ease-in-out;
+    white-space: nowrap; /* 글자가 쪼개져서 아래로 튕겨 떨어지는 현상 차단 */
 }
 
 @keyframes spinLoader {
@@ -89,7 +91,7 @@ body {
     50% { opacity: 1; }
 }
 
-/* 최적화 모드 제어 */
+/* 최적화 세팅 */
 body.eco-mode {
     background: #111326 !important; 
     animation: none !important;
@@ -123,7 +125,6 @@ body.eco-mode #stars-container {
     100% { transform: translateY(-5dvh) scale(1.2); opacity: 0; }
 }
 
-/* 대시보드 카드 */
 .main-container {
     position: relative;
     z-index: 2;
@@ -177,7 +178,6 @@ body.countup-active #mode-toggle {
     background: rgba(244, 114, 182, 0.05);
 }
 
-/* 타이틀 세팅 */
 .title {
     font-family: 'Cinzel', 'Noto Serif KR', serif;
     font-size: clamp(1.35rem, 4.6vw, 2.1rem);
@@ -191,7 +191,7 @@ body.countup-active #mode-toggle {
     -webkit-text-fill-color: transparent;
 }
 
-/* 이모지 컬러 보존 스위치 패키지 */
+/* 이모지 컬러 마스크 파괴 및 해상도 보존 클래스 */
 .title .emoji {
     display: inline-block;
     background: none !important;
@@ -215,7 +215,6 @@ body.countup-active #mode-toggle {
     opacity: 0.6;
 }
 
-/* 플레이어 디자인 */
 .player-wrapper {
     display: flex;
     flex-direction: column;
@@ -293,7 +292,6 @@ body.countup-active #mode-toggle {
     color: #a78bfa;
 }
 
-/* 카운트다운 레이아웃 */
 .countdown-wrapper {
     display: flex;
     justify-content: space-between;
