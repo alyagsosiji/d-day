@@ -3,7 +3,7 @@
    ========================================================== */
 const TARGET_YEAR  = 2026;  // 연도
 const TARGET_MONTH = 6;     // 월 (1 ~ 12)
-const TARGET_DAY   = 6;    // 일 (1 ~ 31)
+const TARGET_DAY   = 6;     // 일 (1 ~ 31)
 const TARGET_HOUR  = 8;     // 시 (0 ~ 23)
 const TARGET_MIN   = 0;     // 분 (0 ~ 59)
 const TARGET_SEC   = 0;     // 초 (0 ~ 59)
@@ -26,7 +26,6 @@ function updateCountdown() {
 
         if (difference < 0) {
             difference = 0;
-            // 🛠️ 이모지에 전용 클래스(emoji)를 입혀 깨짐 및 잘림 전면 차단
             mainTitle.innerHTML = '수평선 너머 마침내 마주한<br>우리의 특별한 날 <span class="emoji">✨</span>';
             mainSubtitle.innerText = "26년 06월 06일";
         }
@@ -100,7 +99,7 @@ ecoToggle.addEventListener("click", () => {
     ecoText.innerText = body.classList.contains("eco-mode") ? "최적화 Mode : ON" : "최적화 Mode : OFF";
 });
 
-// 🔒 강력한 불법 유출 및 크롤링 제어 보안 기능
+// 🔒 강력한 보안 기능 (F12, 소스보기, 우클릭, 드래그 완전 방어)
 document.addEventListener("contextmenu", e => e.preventDefault());
 document.addEventListener("selectstart", e => e.preventDefault());
 document.addEventListener("dragstart", e => e.preventDefault());
@@ -170,3 +169,24 @@ for (let i = 0; i < starCount; i++) {
 
     starsContainer.appendChild(star);
 }
+
+// ⏳ [무한 로딩 및 폰트 끊김 완전 차단 솔루션] 
+function removeLoadingScreen() {
+    const loadingScreen = document.getElementById("loading-screen");
+    if (loadingScreen && !loadingScreen.classList.contains("fade-out")) {
+        loadingScreen.classList.add("fade-out");
+        setTimeout(() => {
+            loadingScreen.style.display = "none";
+        }, 600); // style.css에 정의된 transition 타임과 동기화
+    }
+}
+
+// 이벤트 상태 더블 체크 (네트워크 지연 우회)
+if (document.readyState === "complete") {
+    removeLoadingScreen();
+} else {
+    window.addEventListener("load", removeLoadingScreen);
+}
+
+// 🔒 [Fail-Safe 안전장치] 리소스가 꼬여서 로드가 안 되더라도 최대 2초 뒤에는 강제로 화면을 개방
+setTimeout(removeLoadingScreen, 2000);
