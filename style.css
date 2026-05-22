@@ -1,13 +1,18 @@
+/* 🔒 보안 및 초기화: 전역 드래그 복사 및 블록 선택 완전 차단 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent; 
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 body {
     width: 100vw;
-    height: 100dvh; 
+    height: 100dvh; /* 모바일 브라우저 주소창 스크롤 변동에 완벽히 대응 */
     overflow: hidden;
     background: linear-gradient(-45deg, #090d16, #12132c, #250a3a, #0f172a);
     background-size: 400% 400%;
@@ -24,6 +29,15 @@ body {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+/* ── ⚡ 최적화 모드(Eco-mode) 스타일 가동 ── */
+body.eco-mode {
+    background: #111326 !important; /* 그라데이션 이동 연산을 중단하고 정적 컬러 시트 고정 */
+    animation: none !important;
+}
+body.eco-mode #stars-container {
+    display: none !important; /* 모바일 발열 및 배터리를 낭비하는 무작위 별빛 입자 스크립트 강제 드롭 */
 }
 
 #stars-container {
@@ -51,11 +65,12 @@ body {
     100% { transform: translateY(-5dvh) scale(1.2); opacity: 0; }
 }
 
+/* 유리 가공 감성의 메인 카드 디스플레이 */
 .main-container {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: clamp(1.8rem, 5vh, 3.5rem) clamp(1rem, 5vw, 3rem);
+    padding: clamp(1.5rem, 5vh, 3.5rem) clamp(1rem, 5vw, 3rem);
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -63,34 +78,79 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     width: 100%;
-    max-width: 650px;
+    max-width: 630px;
 }
 
+/* 🛠️ 상단 컨트롤 패널 배치 */
+.control-panel {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: clamp(1.2rem, 3vh, 2rem);
+    width: 100%;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 14px;
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.72rem;
+    font-family: sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s;
+}
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+/* 버튼 활성화 디자인 구분 */
+body.eco-mode #eco-toggle {
+    border-color: rgba(34, 211, 238, 0.4);
+    color: #22d3ee;
+    background: rgba(34, 211, 238, 0.05);
+}
+body.countup-active #mode-toggle {
+    border-color: rgba(244, 114, 182, 0.4);
+    color: #f472b6;
+    background: rgba(244, 114, 182, 0.05);
+}
+
+/* 🛠️ 글자 깨짐 및 이모지 자동 줄바꿈 문제 완벽 교정 */
 .title {
     font-family: 'Cinzel', 'Noto Serif KR', serif;
-    font-size: clamp(1.4rem, 4.8vw, 2.2rem);
+    font-size: clamp(1.35rem, 4.6vw, 2.1rem);
     font-weight: 500;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     margin-bottom: 0.5rem;
+    line-height: 1.4;
+    /* word-break: 조사나 이모지가 애매하게 한 글자씩 떨어져 개행되는 현상을 차단하고 단어 단위 정렬 조율 */
+    word-break: keep-all; 
     background: linear-gradient(to right, #ffffff, #e0e7ff, #e8d5ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-    font-size: clamp(0.7rem, 2.2vw, 0.85rem);
+    font-size: clamp(0.68rem, 2.2vw, 0.85rem);
     font-weight: 300;
     letter-spacing: 1px;
     color: #94a3b8;
-    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+    margin-bottom: clamp(1.5rem, 4vh, 2.2rem);
     opacity: 0.6;
 }
 
+/* 음악 플레이어 레이아웃 */
 .player-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: clamp(2rem, 5vh, 3.2rem);
+    margin-bottom: clamp(1.8rem, 4.5vh, 2.8rem);
 }
 
 .cd-capsule {
@@ -106,13 +166,13 @@ body {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
-
 .cd-capsule:hover, .cd-capsule.playing {
     transform: scale(1.04);
     border-color: rgba(192, 132, 252, 0.4);
     box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
 }
 
+/* 보내주신 이미지의 신비로운 그라데이션 컬러 완벽 이식 */
 .cd-disk {
     width: 64px;
     height: 64px;
@@ -125,7 +185,6 @@ body {
     animation: rotateDisk 5s linear infinite;
     animation-play-state: paused;
 }
-
 .cd-capsule.playing .cd-disk {
     animation-play-state: running;
 }
@@ -165,12 +224,13 @@ body {
     color: #a78bfa;
 }
 
+/* 타이머 모바일 해상도 맞춤 정렬 균등 분할화 */
 .countdown-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: clamp(0.2rem, 1.2vw, 1rem);
-    margin-bottom: clamp(1.8rem, 4vh, 2.5rem);
+    gap: clamp(0.1rem, 0.8vw, 0.8rem);
+    margin-bottom: clamp(1.5rem, 3.5vh, 2.2rem);
     width: 100%;
 }
 
@@ -184,7 +244,7 @@ body {
 
 .time-num {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.5rem, 6.2vw, 3.4rem);
+    font-size: clamp(1.4rem, 6vw, 3.2rem);
     font-weight: 700;
     line-height: 1;
     background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #f472b6 100%);
@@ -193,22 +253,23 @@ body {
     filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.2));
 }
 
-/* 밀리초(MS)가 2자리가 되었으므로 다른 숫자들과 크기 및 정렬을 동일하게 맞춤 */
+/* 2자리 변형에 맞춘 밀리초 컴포넌트 크기 최적화 동기화 */
 .ms-box .time-num {
-    font-size: clamp(1.5rem, 6.2vw, 3.4rem);
+    font-size: clamp(1.4rem, 6vw, 3.2rem);
     color: #f472b6;
 }
 
 .time-label {
-    font-size: clamp(0.55rem, 1.6vw, 0.7rem);
+    font-size: clamp(0.5rem, 1.5vw, 0.65rem);
     letter-spacing: 1px;
     color: #475569;
     margin-top: 0.5rem;
     font-weight: 500;
 }
 
+/* 하트 비트 효과 */
 .heart-icon {
-    font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
     color: #f472b6;
     animation: heartbeat 2s infinite ease-in-out;
     filter: drop-shadow(0 0 10px rgba(244, 114, 182, 0.5));
@@ -217,10 +278,11 @@ body {
 
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); opacity: 0.4; }
-    50% { transform: scale(1.18); opacity: 0.9; }
+    50% { transform: scale(1.15); opacity: 0.9; }
 }
 
-@media (max-width: 350px) {
-    .main-container { padding: 1.2rem 0.6rem; }
-    .time-label { font-size: 0.5rem; letter-spacing: 0; }
+/* 초소형 구형 단말기 스크린 예외 패딩 보정 */
+@media (max-width: 360px) {
+    .main-container { padding: 1.2rem 0.5rem; }
+    .control-btn { padding: 6px 10px; font-size: 0.65rem; }
 }
