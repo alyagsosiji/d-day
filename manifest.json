@@ -1,0 +1,22 @@
+{
+  "name": "수평선 너머의 디데이",
+  "short_name": "수평선 너머의 디데이",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#02050d",
+  "theme_color": "#061630",
+  "icons": [
+    {
+      "src": "하은.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "하은.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}
