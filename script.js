@@ -3,7 +3,7 @@
    ========================================================== */
 const TARGET_YEAR  = 2026;  // 연도
 const TARGET_MONTH = 7;     // 월 (1 ~ 12)
-const TARGET_DAY   = 4;     // 일 (1 ~ 31)
+const TARGET_DAY   = 25;     // 일 (1 ~ 31)
 const TARGET_HOUR  = 8;     // 시 (0 ~ 23)
 const TARGET_MIN   = 0;     // 분 (0 ~ 59)
 const TARGET_SEC   = 0;     // 초 (0 ~ 59)
@@ -22,17 +22,17 @@ function updateCountdown() {
     if (currentMode === 'countdown') {
         difference = targetDate - now;
         mainTitle.innerHTML = '수평선 너머의 디데이';
-        mainSubtitle.innerText = "26년 07월 04일을 다시 만날 너를 기다리며.";
+        mainSubtitle.innerText = "26년 07월 25일을 다시 만날 너를 기다리며.";
 
         if (difference < 0) {
             difference = 0;
             mainTitle.innerHTML = '수평선 너머 마침내 다시 마주한<br>우리의 특별한 날 <span class="emoji">✨</span>';
-            mainSubtitle.innerText = "26년 07월 04일";
+            mainSubtitle.innerText = "26년 07월 25일";
         }
     } else {
         difference = now - targetDate;
         mainTitle.innerHTML = '우리가 함께 흘러온 시간 <span class="emoji">🌊</span>';
-        mainSubtitle.innerText = "26년 07월 04일";
+        mainSubtitle.innerText = "26년 07월 25일";
 
         if (difference < 0) {
             difference = 0;
