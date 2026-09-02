@@ -2,10 +2,10 @@
    ⚙️ [초간편 날짜 설정 구역] 숫자만 편하게 변경하세요!.
    ========================================================== */
 const TARGET_YEAR  = 2026;  // 연도
-const TARGET_MONTH = 8;     // 월 (1 ~ 12)
-const TARGET_DAY   = 22;     // 일 (1 ~ 31)
-const TARGET_HOUR  = 8;     // 시 (0 ~ 23)
-const TARGET_MIN   = 0;     // 분 (0 ~ 59)
+const TARGET_MONTH = 9;     // 월 (1 ~ 12)
+const TARGET_DAY   = 5;     // 일 (1 ~ 31)
+const TARGET_HOUR  = 10;     // 시 (0 ~ 23)
+const TARGET_MIN   = 35;     // 분 (0 ~ 59)
 const TARGET_SEC   = 0;     // 초 (0 ~ 59)
 /* ========================================================== */
 
