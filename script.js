@@ -27,12 +27,12 @@ function updateCountdown() {
         if (difference < 0) {
             difference = 0;
             mainTitle.innerHTML = '수평선 너머 마침내 다시 마주한<br>우리의 특별한 날 <span class="emoji">✨</span>';
-            mainSubtitle.innerText = "26년 07월 25일";
+            mainSubtitle.innerText = "26년 09월 19일";
         }
     } else {
         difference = now - targetDate;
         mainTitle.innerHTML = '우리가 함께 흘러온 시간 <span class="emoji">🌊</span>';
-        mainSubtitle.innerText = "26년 07월 25일";
+        mainSubtitle.innerText = "26년 09월 19일";
 
         if (difference < 0) {
             difference = 0;
