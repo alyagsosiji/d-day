@@ -22,7 +22,7 @@ function updateCountdown() {
     if (currentMode === 'countdown') {
         difference = targetDate - now;
         mainTitle.innerHTML = '수평선 너머의 디데이';
-        mainSubtitle.innerText = "26년 07월 25일을 다시 만날 너를 기다리며.";
+        mainSubtitle.innerText = "26년 09월 19일, 다시 만날 너를 기다리며.";
 
         if (difference < 0) {
             difference = 0;
